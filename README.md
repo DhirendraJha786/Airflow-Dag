@@ -1,1 +1,34 @@
 # Airflow-Dag
+
+
+Cloud Composer is a fully managed workflow orchestration service built on Apache Airflow. It helps you author, schedule, and monitor workflows. To perform these tasks, Cloud Composer uses a special identity known as the Composer service account. This service account needs appropriate permissions to deploy and manage resources as defined in the workflows, which are represented by Directed Acyclic Graphs (DAGs).
+
+DAGs are collections of tasks that define the workflow, and they are executed by Cloud Composer to carry out various operations such as data processing, ETL tasks, and more.
+
+Permissions and Roles
+Permissions in Google Cloud are managed through roles. Each role includes a set of permissions that can be assigned to users, groups, or service accounts. When a Composer service account is assigned a role, it inherits the permissions included in that role.
+
+Access Denied Scenario
+If the Composer service account does not have the necessary permissions to perform a specific operation defined in a DAG, an "access denied" error will occur. This happens because the service account is restricted by the permissions of the role assigned to it.
+
+Examples
+Example 1: Cloud Storage Access
+
+Scenario: A DAG includes a task that uploads a file to a Cloud Storage bucket.
+Required Permission: storage.objects.create
+Assigned Role: If the Composer service account has the role roles/storage.viewer, it will not have the storage.objects.create permission.
+Outcome: The task will fail with an "access denied" error because the roles/storage.viewer role only allows viewing objects, not creating them.
+Example 2: BigQuery Operations
+
+Scenario: A DAG includes a task that executes a query in BigQuery.
+Required Permission: bigquery.jobs.create
+Assigned Role: If the Composer service account has the role roles/bigquery.dataViewer, it will not have the bigquery.jobs.create permission.
+Outcome: The task will fail with an "access denied" error because the roles/bigquery.dataViewer role only allows viewing data, not creating jobs.
+Example 3: Pub/Sub Publishing
+
+Scenario: A DAG includes a task that publishes a message to a Pub/Sub topic.
+Required Permission: pubsub.topics.publish
+Assigned Role: If the Composer service account has the role roles/pubsub.viewer, it will not have the pubsub.topics.publish permission.
+Outcome: The task will fail with an "access denied" error because the roles/pubsub.viewer role only allows viewing topics, not publishing messages.
+Conclusion
+To avoid "access denied" errors, ensure that the Composer service account has the necessary roles with the required permissions for all operations defined in your DAGs. This might involve creating custom roles or assigning multiple roles to the service account to cover all needed permissions.
