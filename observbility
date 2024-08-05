@@ -1,0 +1,19 @@
+Observability in Cloud Composer involves monitoring, logging, and tracing to ensure that workflows run smoothly and issues are quickly identified and resolved. Here’s a breakdown of the key components of Cloud Composer observability:
+
+Monitoring
+Google Cloud Monitoring (formerly Stackdriver Monitoring):
+
+Metrics: Cloud Composer integrates with Google Cloud Monitoring to provide detailed metrics about the health and performance of your workflows. These metrics include DAG execution times, task success rates, task retries, and more.
+Dashboards: Pre-configured dashboards give you a visual overview of your workflow's performance. You can customize these dashboards to track specific metrics relevant to your use case.
+Alerts:
+
+Threshold-based Alerts: Set up alerts based on specific thresholds, such as task failure rates or latency issues. When thresholds are breached, notifications can be sent via email, SMS, or other communication channels.
+Anomaly Detection: Leverage machine learning-based anomaly detection to automatically identify unusual patterns in your workflow metrics.
+Logging
+Cloud Logging (formerly Stackdriver Logging):
+
+Log Aggregation: Cloud Composer captures logs from the Airflow scheduler, workers, and web server. These logs are aggregated and made available in Cloud Logging.
+Search and Filter: Use powerful search and filter capabilities to quickly locate specific logs. This is particularly useful for troubleshooting errors and understanding the execution flow of your workflows.
+Structured Logs:
+
+Log-based Metrics: Create log-based metrics to track specific events or errors within your workflows. For instance, you can create a metric for the number of failed tasks and monitor this over time.
